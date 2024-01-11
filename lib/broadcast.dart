@@ -1,3 +1,4 @@
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:bonsoir/bonsoir.dart';
 import 'package:uuid/uuid.dart';
@@ -11,17 +12,22 @@ class BroadcastScreen extends StatefulWidget {
 
 class _BroadcastScreenState extends State<BroadcastScreen> {
   var uuid = const Uuid();
+  DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
   late BonsoirBroadcast broadcast;
   // MediaStream? _mediaStream = MediaStream(" ", " ");
 
   @override
   void initState() {
     super.initState();
+
     print("broadcasting");
     init();
   }
 
   void init() async {
+    var info = await deviceInfo.deviceInfo;
+    print(info);
+    // TODO
     BonsoirService service = BonsoirService(
       name: '${uuid.v1().split('-').last} Near Share Services',
       type: '_sizzy._tcp',
@@ -31,6 +37,7 @@ class _BroadcastScreenState extends State<BroadcastScreen> {
     broadcast = BonsoirBroadcast(service: service);
     await broadcast.ready;
     await broadcast.start();
+    // broadcast.
   }
 
   void disp() async {

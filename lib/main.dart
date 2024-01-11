@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:just_audio/just_audio.dart';
+import 'package:just_audio/just_audio.dart' as just_audio;
 import 'package:near_connect/discovery.dart';
 import 'package:near_connect/broadcast.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -37,7 +37,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _player = AudioPlayer();
+  final _player = just_audio.AudioPlayer();
 
   @override
   void initState() {

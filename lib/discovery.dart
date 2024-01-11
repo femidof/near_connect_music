@@ -1,5 +1,6 @@
 import 'package:bonsoir/bonsoir.dart';
 import 'package:flutter/material.dart';
+import 'package:near_connect/session.dart';
 
 class DiscoveryScreen extends StatefulWidget {
   const DiscoveryScreen({super.key});
@@ -61,6 +62,7 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
   @override
   void dispose() {
     disp();
+    print("I have disposed");
     super.dispose();
   }
 
@@ -80,6 +82,16 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
                     subtitle: Text(service.type), //?? "IPv4 not available"),
                     onTap: () {
                       // Implement logic to connect to the selected service
+                      print(
+                          "Picking ${service.name}  ${service.type}   ${service.port}    ${service.toJson()['service.host']} }");
+                      Navigator.pushReplacement(context, MaterialPageRoute(
+                        builder: (context) {
+                          return SessionRoom(
+                            hostname: service.toJson()['service.host'],
+                            port: service.toJson()['service.port'],
+                          );
+                        },
+                      ));
                     },
                   );
                 },
